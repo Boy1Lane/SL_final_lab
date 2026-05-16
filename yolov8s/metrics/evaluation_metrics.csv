@@ -1,0 +1,2 @@
+model,dataset,train_images,val_images,test_images,epochs,batch_size,mAP@0.5_PascalVOC,mAP@0.5:0.95_COCO,avg_inference_time_seconds_per_image,fps,total_parameters,trainable_parameters,model_size_MB,device
+YOLOv8s,VOC0712 traffic subset 3000/500/1000,3000,500,1000,30,16,0.740367061447967,0.5184398470692995,0.021939966678619385,45.57892063594178,11127519,0,21.45798683166504,cuda

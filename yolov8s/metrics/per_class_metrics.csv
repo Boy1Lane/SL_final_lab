@@ -1,0 +1,6 @@
+class,mAP,precision,recall,num_objects
+person,0.519815150721676,,,
+car,0.5973205789801199,,,
+bus,0.5571544744973806,,,
+bicycle,0.4094471514885886,,,
+motorbike,0.5084618796587322,,,
