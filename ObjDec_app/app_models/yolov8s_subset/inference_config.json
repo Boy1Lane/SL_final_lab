@@ -1,0 +1,9 @@
+{
+  "model_name": "YOLOv8s subset demo model",
+  "model_file": "best.pt",
+  "image_size": 640,
+  "confidence_threshold": 0.25,
+  "iou_threshold": 0.45,
+  "classes": ["person", "car", "bus", "bicycle", "motorbike"],
+  "device": "auto"
+}
