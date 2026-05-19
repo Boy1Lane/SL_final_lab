@@ -1,0 +1,31 @@
+YOLOv8s Training Log
+==================================================
+Timestamp: 2026-05-17 09:40:53.242556
+ZIP_PATH: /content/drive/MyDrive/ObjectDetection/subset_3000_500_1000.zip
+GPU: Tesla T4
+Unzipping dataset...
+Dataset unzipped.
+SUBSET_ROOT: /content/subset_3000_500_1000
+YOLO_DIR: /content/subset_3000_500_1000/yolo
+DATA_YAML: /content/subset_3000_500_1000/yolo/data.yaml
+Fixed data.yaml saved.
+Train images: 3000
+Val images: 500
+Test images: 1000
+training_config.json saved.
+Start training YOLOv8s...
+Training finished. Total time: 1987.49 seconds
+Average epoch time: 66.25 seconds
+training_history.csv saved.
+Start evaluation on test set...
+mAP@0.5: 0.8792838842824022
+mAP@0.5:0.95: 0.6491979948543214
+Precision: 0.8842213924921485
+Recall: 0.7849105957851963
+per_class_metrics.csv saved.
+Inference measured on full test set: 1000 images
+Average inference time: 0.02274696373939514
+FPS: 43.961911200839275
+prediction_examples.csv and sample_predictions saved.
+evaluation_metrics.csv/json saved.
+README.md saved.

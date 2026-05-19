@@ -1,0 +1,2 @@
+model,dataset,train_images,val_images,test_images,epochs,batch_size,image_size,mAP@0.5_PascalVOC,mAP@0.5:0.95_COCO,precision,recall,avg_inference_time_seconds_per_image,fps,total_parameters,trainable_parameters,model_size_MB,device,gpu
+YOLOv8s subset,VOC0712 traffic 5 classes subset,17265,2157,2157,30,16,640,0.8461324820427603,0.6355022694516625,0.8528524569053706,0.7509901776929775,0.021818588972091674,45.83247804333762,11127519,0,21.45560646057129,cuda,Tesla T4

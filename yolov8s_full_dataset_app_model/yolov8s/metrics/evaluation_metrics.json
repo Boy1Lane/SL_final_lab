@@ -1,0 +1,21 @@
+{
+  "model": "YOLOv8s subset",
+  "dataset": "VOC0712 traffic 5 classes subset",
+  "train_images": 17265,
+  "val_images": 2157,
+  "test_images": 2157,
+  "epochs": 30,
+  "batch_size": 16,
+  "image_size": 640,
+  "mAP@0.5_PascalVOC": 0.8461324820427603,
+  "mAP@0.5:0.95_COCO": 0.6355022694516625,
+  "precision": 0.8528524569053706,
+  "recall": 0.7509901776929775,
+  "avg_inference_time_seconds_per_image": 0.021818588972091674,
+  "fps": 45.83247804333762,
+  "total_parameters": 11127519,
+  "trainable_parameters": 0,
+  "model_size_MB": 21.45560646057129,
+  "device": "cuda",
+  "gpu": "Tesla T4"
+}

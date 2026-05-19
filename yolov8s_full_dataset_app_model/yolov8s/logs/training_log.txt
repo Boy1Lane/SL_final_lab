@@ -1,0 +1,11 @@
+YOLOv8s Full Dataset Training Log
+==================================================
+Timestamp: 2026-05-18 04:39:54.413131
+ZIP_PATH: /content/drive/MyDrive/ObjectDetection/voc_traffic_5classes.zip
+YOLO_DIR: /content/yolo
+DATA_YAML: /content/yolo/data.yaml
+GPU: Tesla T4
+Train images: 17265
+Val images: 2157
+Test images: 2157
+Training finished. Total time: 10924.45 seconds

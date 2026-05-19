@@ -1,0 +1,17 @@
+{
+    "model": "YOLOv8s",
+    "dataset": "VOC0712 traffic subset 3000/500/1000",
+    "train_images": 3000,
+    "val_images": 500,
+    "test_images": 1000,
+    "epochs": 30,
+    "batch_size": 16,
+    "mAP@0.5_PascalVOC": 0.8792838842824022,
+    "mAP@0.5:0.95_COCO": 0.6491979948543214,
+    "avg_inference_time_seconds_per_image": 0.02274696373939514,
+    "fps": 43.961911200839275,
+    "total_parameters": 11127519,
+    "trainable_parameters": 0,
+    "model_size_MB": 21.45804786682129,
+    "device": "cuda"
+}

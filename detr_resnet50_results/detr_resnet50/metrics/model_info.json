@@ -1,0 +1,7 @@
+{
+  "model_name": "facebook/detr-resnet-50",
+  "checkpoint_dir": "/content/model_results/detr_resnet50/checkpoints/best_detr_model",
+  "model_size_mb": 158.7875747680664,
+  "num_parameters": 41502666,
+  "num_trainable_parameters": 41502666
+}

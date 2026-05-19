@@ -1,0 +1,2 @@
+model,dataset,train_images,val_images,test_images,epochs,batch_size,mAP@0.5_PascalVOC,mAP@0.5:0.95_COCO,avg_inference_time_seconds_per_image,fps,total_parameters,trainable_parameters,model_size_MB,device
+DETR ResNet-50,VOC0712 traffic subset 3000/500/1000,3000,500,1000,10,4,0.6900621056556702,0.4680921733379364,0.04035744428634644,24.778575989716867,41502666,41502666,158.7875747680664,cuda

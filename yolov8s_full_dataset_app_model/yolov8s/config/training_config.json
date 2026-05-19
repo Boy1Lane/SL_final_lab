@@ -1,0 +1,28 @@
+{
+    "model_name": "YOLOv8s subset",
+    "model_type": "One-stage object detector",
+    "dataset": "VOC0712 traffic 5 classes subset",
+    "dataset_path": "/content/app_model_results/yolov8s_subset/config/data.yaml",
+    "classes": [
+        "person",
+        "car",
+        "bus",
+        "bicycle",
+        "motorbike"
+    ],
+    "num_classes": 5,
+    "train_images": 17265,
+    "val_images": 2157,
+    "test_images": 2157,
+    "epochs": 30,
+    "batch_size": 16,
+    "image_size": 640,
+    "learning_rate": "default_ultralytics",
+    "weight_decay": "default_ultralytics",
+    "optimizer": "auto/default_ultralytics",
+    "scheduler": "default_ultralytics",
+    "pretrained": true,
+    "freeze_backbone": false,
+    "device": "cuda",
+    "gpu": "Tesla T4"
+}

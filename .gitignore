@@ -1,2 +1,5 @@
 .vs/
 **/.vs/
+
+# Large model files
+*.safetensors
