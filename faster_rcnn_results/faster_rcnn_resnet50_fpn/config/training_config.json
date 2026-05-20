@@ -1,0 +1,28 @@
+{
+  "model_name": "Faster R-CNN ResNet50-FPN",
+  "model_type": "Two-stage object detector",
+  "dataset": "VOC0712 traffic subset 3000/500/1000",
+  "dataset_path": "/content/subset_3000_500_1000/coco",
+  "classes": [
+    "person",
+    "car",
+    "bus",
+    "bicycle",
+    "motorbike"
+  ],
+  "num_classes": 5,
+  "train_images": 3000,
+  "val_images": 500,
+  "test_images": 1000,
+  "epochs": 10,
+  "batch_size": 2,
+  "image_size": null,
+  "learning_rate": 0.005,
+  "weight_decay": 0.0005,
+  "optimizer": "SGD",
+  "scheduler": "StepLR",
+  "pretrained": true,
+  "freeze_backbone": false,
+  "device": "cuda",
+  "gpu": "Tesla T4"
+}

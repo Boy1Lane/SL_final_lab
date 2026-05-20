@@ -1,0 +1,15 @@
+Bắt đầu huấn luyện Faster R-CNN...
+Epoch 1/10 | Train Loss: 0.3987 | Val Loss: 0.3105 | LR: 0.005000 | Time: 961s
+Best model saved at epoch: 1
+Epoch 2/10 | Train Loss: 0.3171 | Val Loss: 0.2788 | LR: 0.005000 | Time: 965s
+Best model saved at epoch: 2
+Epoch 3/10 | Train Loss: 0.2794 | Val Loss: 0.2610 | LR: 0.000500 | Time: 966s
+Best model saved at epoch: 3
+Epoch 4/10 | Train Loss: 0.2064 | Val Loss: 0.2434 | LR: 0.000500 | Time: 965s
+Best model saved at epoch: 4
+Epoch 5/10 | Train Loss: 0.1843 | Val Loss: 0.2443 | LR: 0.000500 | Time: 966s
+Epoch 6/10 | Train Loss: 0.1727 | Val Loss: 0.2471 | LR: 0.000050 | Time: 965s
+Epoch 7/10 | Train Loss: 0.1616 | Val Loss: 0.2487 | LR: 0.000050 | Time: 966s
+Epoch 8/10 | Train Loss: 0.1603 | Val Loss: 0.2482 | LR: 0.000050 | Time: 965s
+Epoch 9/10 | Train Loss: 0.1588 | Val Loss: 0.2492 | LR: 0.000005 | Time: 969s
+Epoch 10/10 | Train Loss: 0.1576 | Val Loss: 0.2493 | LR: 0.000005 | Time: 966s

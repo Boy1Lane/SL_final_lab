@@ -3,3 +3,5 @@
 
 # Large model files
 *.safetensors
+
+*.pth
