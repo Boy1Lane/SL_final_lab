@@ -24,7 +24,7 @@ from src.image_utils import (
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 MODELS_ROOT = PROJECT_ROOT / "app_models"
-DEFAULT_MODEL_FOLDER = "yolov8s_subset"
+DEFAULT_MODEL_FOLDER = "YOLOv8s full split"
 OUTPUT_DIR = PROJECT_ROOT / "outputs"
 ALLOWED_IMAGE_TYPES = ["jpg", "jpeg", "png"]
 PASTE_COMPONENT_DIR = PROJECT_ROOT / "src" / "components" / "paste_image"
@@ -393,24 +393,6 @@ def make_compare_image(original: Image.Image, annotated: Any, reveal_percent: in
     return combined
 
 
-def render_model_metadata(result: dict[str, Any], config: dict, image_size: tuple[int, int]) -> None:
-    inference_ms = float(result.get("inference_time_ms", 0.0))
-    fps = 1000 / inference_ms if inference_ms > 0 else 0
-    metadata_top = [
-        ("Model", str(config.get("model_name", "YOLOv8"))),
-        ("Thời gian xử lý", f"{inference_ms:.0f} ms"),
-        ("Kích thước ảnh", f"{image_size[0]} x {image_size[1]}"),
-    ]
-    metadata_bottom = [
-        ("Thiết bị", str(result.get("device", "auto")).upper()),
-        ("FPS", f"{fps:.1f}"),
-    ]
-    for column, (label, value) in zip(st.columns(len(metadata_top), gap="medium"), metadata_top):
-        column.metric(label, value)
-    for column, (label, value) in zip(st.columns(len(metadata_bottom), gap="medium"), metadata_bottom):
-        column.metric(label, value)
-
-
 def render_detection_statistics(detections: list[dict]) -> None:
     if not detections:
         st.info("Thống kê sẽ hiển thị khi có ít nhất một đối tượng được phát hiện.")
@@ -712,9 +694,6 @@ if device == "cuda" and result and result.get("device") == "cpu":
     st.warning("Máy hiện không có CUDA khả dụng. App đã tự chuyển sang CPU.")
 
 if result and image_size is not None:
-    st.markdown('<div class="section-label">Thông tin model</div>', unsafe_allow_html=True)
-    render_model_metadata(result, config, image_size)
-
     output_path = result.get("output_path")
     download_col, saved_col = st.columns([0.35, 0.65], gap="large")
     with download_col:

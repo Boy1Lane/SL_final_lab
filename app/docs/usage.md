@@ -5,14 +5,14 @@
 Đặt model YOLOv8 đã train vào:
 
 ```text
-app_models/yolov8s_subset/best.pt
+app_models/YOLOv8s full split/best.pt
 ```
 
 Các file cấu hình đi kèm:
 
 ```text
-app_models/yolov8s_subset/class_names.json
-app_models/yolov8s_subset/inference_config.json
+app_models/YOLOv8s full split/class_names.json
+app_models/YOLOv8s full split/inference_config.json
 ```
 
 ## 2. Chạy ứng dụng

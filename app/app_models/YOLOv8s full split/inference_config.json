@@ -1,5 +1,5 @@
 {
-  "model_name": "YOLOv8s subset demo model",
+  "model_name": "YOLOv8s full split model",
   "model_file": "best.pt",
   "image_size": 640,
   "confidence_threshold": 0.25,

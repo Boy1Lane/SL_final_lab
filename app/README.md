@@ -61,7 +61,7 @@ app/
 ├── requirements.txt
 ├── README.md
 ├── app_models/
-│   └── yolov8s_subset/
+│   └── YOLOv8s full split/
 │       ├── best.pt
 │       ├── class_names.json
 │       └── inference_config.json
