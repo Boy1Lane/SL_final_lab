@@ -9,10 +9,9 @@
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
 
-      body {
-        margin: 0;
-      }
+      body { margin: 0; }
 
+      /* ── Vùng dán (chưa có ảnh) ── */
       .paste-zone {
         align-items: center;
         background: rgba(15, 23, 42, 0.68);
@@ -27,7 +26,6 @@
         padding: 14px 16px;
         transition: border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
       }
-
       .paste-zone:focus,
       .paste-zone:hover {
         background: rgba(14, 165, 233, 0.10);
@@ -50,7 +48,7 @@
       .title {
         color: #f8fafc;
         font-size: 14px;
-        font-weight: 760;
+        font-weight: 700;
         line-height: 1.3;
       }
 
@@ -60,9 +58,100 @@
         line-height: 1.45;
         margin-top: 4px;
       }
+
+      /* ── Preview ảnh đã dán ── */
+      .preview-wrapper {
+        display: none;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(56, 189, 248, 0.45);
+        background: rgba(15, 23, 42, 0.68);
+      }
+      .preview-wrapper.visible { display: block; }
+
+      .preview-img {
+        display: block;
+        width: 100%;
+        max-height: 300px;
+        object-fit: contain;
+        background: rgba(2, 6, 23, 0.6);
+      }
+
+      /* Thanh dưới ảnh */
+      .preview-bar {
+        align-items: center;
+        background: rgba(15, 23, 42, 0.92);
+        border-top: 1px solid rgba(56, 189, 248, 0.18);
+        display: flex;
+        gap: 8px;
+        justify-content: space-between;
+        padding: 8px 12px;
+      }
+
+      .preview-info {
+        align-items: center;
+        display: flex;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .preview-icon {
+        align-items: center;
+        background: rgba(34, 197, 94, 0.15);
+        border: 1px solid rgba(34, 197, 94, 0.35);
+        border-radius: 6px;
+        color: #86efac;
+        display: flex;
+        flex: 0 0 30px;
+        height: 30px;
+        justify-content: center;
+      }
+
+      .preview-text-title {
+        color: #f8fafc;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .preview-text-hint {
+        color: #94a3b8;
+        font-size: 11px;
+        margin-top: 2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* Nút xóa ảnh */
+      .btn-clear {
+        align-items: center;
+        background: rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.40);
+        border-radius: 6px;
+        color: #fca5a5;
+        cursor: pointer;
+        display: flex;
+        flex-shrink: 0;
+        font-size: 12px;
+        font-weight: 700;
+        gap: 5px;
+        height: 30px;
+        justify-content: center;
+        padding: 0 10px;
+        transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+        white-space: nowrap;
+      }
+      .btn-clear:hover {
+        background: rgba(239, 68, 68, 0.26);
+        border-color: rgba(239, 68, 68, 0.75);
+        color: #fecaca;
+      }
+      .btn-clear:active { background: rgba(239, 68, 68, 0.40); }
     </style>
   </head>
   <body>
+    <!-- Vùng dán ảnh -->
     <div class="paste-zone" id="pasteZone" tabindex="0" role="button" aria-label="Dán ảnh từ clipboard">
       <div class="icon" aria-hidden="true">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -78,72 +167,135 @@
       </div>
     </div>
 
-    <script>
-      const zone = document.getElementById("pasteZone");
-      const title = document.getElementById("title");
-      const hint = document.getElementById("hint");
+    <!-- Preview ảnh đã dán -->
+    <div class="preview-wrapper" id="previewWrapper">
+      <img class="preview-img" id="previewImg" src="" alt="Ảnh đã dán" />
+      <div class="preview-bar">
+        <div class="preview-info">
+          <div class="preview-icon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div style="min-width:0">
+            <div class="preview-text-title" id="previewTitle">Đã dán ảnh</div>
+            <div class="preview-text-hint" id="previewHint">Sẵn sàng để detect</div>
+          </div>
+        </div>
+        <button class="btn-clear" id="btnClear" type="button" title="Xóa ảnh, dán ảnh khác">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          Xóa
+        </button>
+      </div>
+    </div>
 
-      function streamlitMessage(type, data) {
+    <script>
+      const zone           = document.getElementById("pasteZone");
+      const titleEl        = document.getElementById("title");
+      const hintEl         = document.getElementById("hint");
+      const previewWrapper = document.getElementById("previewWrapper");
+      const previewImg     = document.getElementById("previewImg");
+      const previewTitle   = document.getElementById("previewTitle");
+      const previewHint    = document.getElementById("previewHint");
+      const btnClear       = document.getElementById("btnClear");
+
+      // Trạng thái hiện tại: null = chưa có ảnh, object = có ảnh
+      let currentPayload = null;
+
+      // ── Giao tiếp Streamlit ──────────────────────────────────────────
+      function postToStreamlit(type, data) {
         window.parent.postMessage({ isStreamlitMessage: true, type, ...data }, "*");
       }
-
       function setFrameHeight() {
-        streamlitMessage("streamlit:setFrameHeight", { height: document.body.scrollHeight });
+        postToStreamlit("streamlit:setFrameHeight", { height: document.body.scrollHeight });
       }
-
-      function ready() {
-        streamlitMessage("streamlit:componentReady", { apiVersion: 1 });
-        setFrameHeight();
-      }
-
       function setValue(value) {
-        streamlitMessage("streamlit:setComponentValue", {
-          dataType: "json",
-          value,
-        });
+        postToStreamlit("streamlit:setComponentValue", { dataType: "json", value });
       }
 
-      async function handlePaste(event) {
+      // ── Chuyển UI ────────────────────────────────────────────────────
+      function showPasteZone() {
+        currentPayload = null;
+        zone.style.display = "flex";
+        previewWrapper.classList.remove("visible");
+        titleEl.textContent = "Click vào đây, sau đó nhấn Ctrl+V";
+        hintEl.textContent  = "Hỗ trợ screenshot, ảnh đã copy, Snipping Tool hoặc ảnh copy từ trình duyệt.";
+        setTimeout(setFrameHeight, 30);
+        zone.focus();
+      }
+
+      function showPreview(dataUrl, mimeType, fileName) {
+        previewImg.src = dataUrl;
+        previewTitle.textContent = "Đã dán ảnh";
+        previewHint.textContent  = `${mimeType || "image"} · ${fileName || "image.png"}`;
+        zone.style.display = "none";
+        previewWrapper.classList.add("visible");
+        setTimeout(setFrameHeight, 30);
+      }
+
+      // ── Xử lý dán ───────────────────────────────────────────────────
+      function handlePaste(event) {
+        // Ngăn event lan lên (tránh kích hoạt nhiều lần)
+        event.stopPropagation();
+
         const items = Array.from(event.clipboardData?.items || []);
         const imageItem = items.find((item) => item.type.startsWith("image/"));
         if (!imageItem) {
-          title.textContent = "Clipboard chưa có ảnh";
-          hint.textContent = "Hãy copy screenshot hoặc ảnh JPG/PNG rồi nhấn Ctrl+V lại.";
+          // Chỉ cập nhật text khi vùng dán đang hiển thị
+          if (!currentPayload) {
+            titleEl.textContent = "Clipboard chưa có ảnh";
+            hintEl.textContent  = "Hãy copy screenshot hoặc ảnh JPG/PNG rồi nhấn Ctrl+V lại.";
+          }
           return;
         }
 
         const file = imageItem.getAsFile();
         const reader = new FileReader();
         reader.onload = () => {
-          title.textContent = "Đã dán ảnh";
-          hint.textContent = `${file.type || "image"} đã sẵn sàng để detect.`;
-          setValue({
-            dataUrl: reader.result,
-            mimeType: file.type,
-            name: file.name || "clipboard-image.png",
-            updatedAt: Date.now(),
-          });
+          const dataUrl  = reader.result;
+          const mimeType = file.type || "image/png";
+          const fileName = file.name || "image.png";
+
+          currentPayload = { dataUrl, mimeType, name: fileName, updatedAt: Date.now() };
+          showPreview(dataUrl, mimeType, fileName);
+          setValue(currentPayload);
         };
         reader.readAsDataURL(file);
       }
+
+      // ── Nút xóa ảnh ─────────────────────────────────────────────────
+      btnClear.addEventListener("click", () => {
+        previewImg.src = "";
+        showPasteZone();
+        // Gửi signal "đã xóa" về Streamlit (dùng timestamp để Streamlit nhận ra thay đổi)
+        setValue({ cleared: true, clearedAt: Date.now() });
+      });
+
+      // ── Paste listeners ──────────────────────────────────────────────
+      // Chỉ dùng MỘT listener ở window-level để tránh double-fire.
+      // Paste chỉ được nhận trong iframe khi iframe đang có focus.
+      window.addEventListener("paste", handlePaste);
 
       zone.addEventListener("click", () => zone.focus());
       zone.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          zone.focus();
-          title.textContent = "Vùng dán đã được chọn";
-          hint.textContent = "Nhấn Ctrl+V để dán ảnh từ clipboard.";
+          titleEl.textContent = "Vùng dán đã được chọn";
+          hintEl.textContent  = "Nhấn Ctrl+V để dán ảnh từ clipboard.";
         }
       });
-      zone.addEventListener("paste", handlePaste);
+
       window.addEventListener("message", (event) => {
         if (event.data?.type === "streamlit:render") {
           setFrameHeight();
         }
       });
 
-      ready();
+      // Sẵn sàng
+      postToStreamlit("streamlit:componentReady", { apiVersion: 1 });
+      setFrameHeight();
     </script>
   </body>
 </html>
