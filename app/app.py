@@ -307,7 +307,14 @@ def load_file_input(uploaded_file) -> dict[str, Any] | None:
 
 
 def load_pasted_input(payload: dict[str, Any] | None) -> dict[str, Any] | None:
-    if not isinstance(payload, dict) or not payload.get("dataUrl"):
+    if not isinstance(payload, dict):
+        return None
+    # Khi người dùng nhấn nút X trong component → xóa luôn kết quả cũ
+    if payload.get("cleared"):
+        for key in ("last_result", "last_image_id", "last_signature", "has_detection"):
+            st.session_state.pop(key, None)
+        return None
+    if not payload.get("dataUrl"):
         return None
     data_url = str(payload["dataUrl"])
     encoded = data_url.split(",", 1)[-1].encode("utf-8")
